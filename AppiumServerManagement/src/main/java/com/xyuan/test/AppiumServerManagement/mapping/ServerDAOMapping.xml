@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.xyuan.test.AppiumServerManagement.DAO.ServerDAO">
+    <insert id="insert">
+        insert into server(pid,udid,status,casenumber) values(#{pid},#{udid},0,0)
+    </insert>
+    
+    <update id="EmptyUDID">
+        update server set udid='' where pid = #{pid};
+    </update>
+    
+    <update id="updateStatusRunning">
+        update server set status=2 where pid=#{pid}
+    </update>    
+    
+    <update id="updateStatusComplete">
+        update server set status=3 where pid=#{pid}
+    </update>   
+    
+    <update id="updateAllDeviceStatus">
+        update device set status=0
+    </update>   
+    
+    <delete id="deleteByPID">
+        delete from server where pid=#{pid}
+    </delete>
+    
+    <delete id="deleteAllServer">
+        delete from server
+    </delete>    
+    
+    <select id="getUDIDByPid" resultType="String">
+        select udid from server where pid=#{pid}
+    </select>
+    
+    <select id="getFreeDevice"  resultType="com.xyuan.test.AppiumServerManagement.DTO.Device">
+        select * from device where status=0 limit 1
+    </select>   
+    
+    <select id="getFreeDeviceCount"  resultType="int">
+        select count(*) from device where status=0
+    </select>       
+    
+    <select id="getSavedPids"  resultType="String">
+        select pid from server
+    </select>
+    
+    <select id="getBeKilledPids"  resultType="String">
+        select pid from server where status=4
+    </select>    
+    
+    <update id="updateDeviceStatus">
+        update device set status=#{status} where udid=#{udid}
+    </update>  
+    
+    <update id="updateCaseNumByPID">
+        update server set casenum=#{casenum} where pid=#{pid}
+    </update>       
+</mapper>

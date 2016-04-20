@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lib/log4j-1.2.17.jar lib/mybatis-3.2.7.jar lib/mysql-connector-java-5.1.30.jar 
+Main-Class: com.xyuan.test.AppiumServerManagement.AppiumServer 
+
