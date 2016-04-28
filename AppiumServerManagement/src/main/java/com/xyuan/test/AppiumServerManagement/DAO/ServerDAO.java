@@ -1,10 +1,7 @@
 package com.xyuan.test.AppiumServerManagement.DAO;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.apache.ibatis.annotations.Param;
-
 import com.xyuan.test.AppiumServerManagement.DTO.Device;
 
 public interface ServerDAO {

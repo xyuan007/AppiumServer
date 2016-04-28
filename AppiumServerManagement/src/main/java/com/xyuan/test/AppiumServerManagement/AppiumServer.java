@@ -1,16 +1,13 @@
 package com.xyuan.test.AppiumServerManagement;
 
 import java.util.ArrayList;
-
-import org.apache.log4j.Logger;
-
 import com.xyuan.test.AppiumServerManagement.DTO.Device;
 import com.xyuan.test.AppiumServerManagement.Util.CONSTUtil;
 import com.xyuan.test.AppiumServerManagement.Util.MyLog;
 import com.xyuan.test.AppiumServerManagement.Util.NodeServerUtil;
 
 public class AppiumServer{
-	static MyLog log = MyLog.getLoger();
+	static MyLog loger = MyLog.getLoger();
 	
 	public static void main(String[] args) throws Exception{
 		AppiumServer.killAllServer();
@@ -20,12 +17,14 @@ public class AppiumServer{
 			AppiumServer.startNewServer(device);
 		}
 		
+		loger.info("start");
 		while(true){
 			Thread.sleep(CONSTUtil.INTEVAL);
 			ArrayList<String> killedServer = AppiumServer.getBeKilledServer();
 			if(killedServer != null){
 				for(int i=0;i<killedServer.size();i++){
 					String pid = killedServer.get(i);
+					System.out.println("killed Node:" + pid);
 					AppiumServer.killServerByPid(pid);
 					Device device = DataManagement.getFreeDevice();
 					AppiumServer.startNewServer(device);

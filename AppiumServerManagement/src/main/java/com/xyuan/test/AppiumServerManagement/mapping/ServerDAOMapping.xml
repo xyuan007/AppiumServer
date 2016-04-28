@@ -44,9 +44,10 @@
     <select id="getSavedPids"  resultType="String">
         select pid from server
     </select>
-    
+
     <select id="getBeKilledPids"  resultType="String">
-        select pid from server where status=4
+		select pid from server where status=4  UNION
+		select pid from device where status=2 and hour(timediff(NOW(),updatetime)) >= 2
     </select>    
     
     <update id="updateDeviceStatus">
@@ -54,6 +55,6 @@
     </update>  
     
     <update id="updateCaseNumByPID">
-        update server set casenum=#{casenum} where pid=#{pid}
+        update server set casenumber=#{casenum} where pid=#{pid}
     </update>       
 </mapper>
